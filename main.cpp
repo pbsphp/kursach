@@ -27,7 +27,9 @@ int main(int argc, char *argv[])
         }
 
         for (int i = 0; i < filenamesList.size(); ++i) {
-            cout << filenamesList[i] << endl;
+            int diff = text_overlap(fileForComparison, filenamesList[i]);
+            cout << "Compare with " << filenamesList[i] << " : " \
+                << diff << "%" << endl;
         }
 
     }

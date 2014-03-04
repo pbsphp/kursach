@@ -47,7 +47,7 @@ int text_overlap(string filename1, string filename2)
     else {
 
         // TODO: throw exception
-        std::cout << "Error 1" << std::endl;
+        std::cout << "Cannot open " << filename1 << " or " << filename2 << std::endl;
 
         return 0;
     }
