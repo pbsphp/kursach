@@ -30,7 +30,7 @@ int levenshtein_distance(vector<string> &file1, vector<string> &file2, int i, in
     }
     else if ((j > 0) && (i > 0) && (file1[i - 1] != file2[j - 1])) {
         return min(
-                        levenshtein_distance(file1, file2, i, j - 1) + 1,
+                        levenshtein_distance(file1, file2, i    , j - 1) + 1,
                     min(
                         levenshtein_distance(file1, file2, i - 1, j    ) + 1,
                         levenshtein_distance(file1, file2, i - 1, j - 1) + 1

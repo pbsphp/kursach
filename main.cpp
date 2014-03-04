@@ -3,31 +3,18 @@
 #include <vector>
 
 
-#include "levenshtein_distance.hpp"
+#include "text_overlap.hpp"
 
 using namespace std;
 
 
 
-int main()
+int main(int argc, char *argv[])
 {
 
-    vector<string> file1;
-    vector<string> file2;
 
 
-    file1.push_back("first");
-    file1.push_back("second");
-    file1.push_back("third");
-
-    file2.push_back("first");
-    file2.push_back("sooqa");
-    file2.push_back("second");
-    file2.push_back("sooqa");
-    file2.push_back("third");
-    file2.push_back("sooqa");
-
-    cout << levenshtein_distance(file1, file2, 3, 6) << endl;
+    cout << text_overlap("/tmp/1.txt", "/tmp/2.txt") << endl;
 
     return 0;
 }
