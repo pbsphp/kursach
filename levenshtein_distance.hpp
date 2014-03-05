@@ -14,34 +14,50 @@ using std::min;
 
 
 
-int levenshtein_distance(vector<string> &file1, vector<string> &file2, int i, int j)
+inline int costOfReplacement(string first, string second)
 {
-    if ((i == 0) && (j == 0)) {
-        return 0;
-    }
-    else if ((j == 0) && (i > 0)) {
-        return i;
-    }
-    else if ((i == 0) && (j > 0)) {
-        return j;
-    }
-    else if (file1[i - 1] == file2[j - 1]) {
-        return levenshtein_distance(file1, file2, i - 1, j - 1);
-    }
-    else if ((j > 0) && (i > 0) && (file1[i - 1] != file2[j - 1])) {
-        return min(
-                        levenshtein_distance(file1, file2, i    , j - 1) + 1,
-                    min(
-                        levenshtein_distance(file1, file2, i - 1, j    ) + 1,
-                        levenshtein_distance(file1, file2, i - 1, j - 1) + 1
-                    )
-                );
+    return (first != second) ? 1 : 0;
+}
+
+
+
+int levenshtein_distance(vector<string> &file1, vector<string> &file2, int m, int n)
+{
+    // TODO: m and n is lengths, can be calculated here. Remove.
+
+    int matrix[m + 1][n + 1];
+
+    for (int i = 0; i <= m; ++i) {
+        for (int j = 0; j <= n; ++j) {
+            matrix[i][j] = 0;
+        }
     }
 
-    // TODO: Throw exception
-    std::cout << "fail" << std::endl;
-    return -1;
+
+    for (int j = 1; j <= n; ++j) {
+        matrix[0][j] = matrix[0][j - 1] + 1;
+    }
+
+
+    for (int i = 1; i <= m; ++i) {
+        matrix[i][0] = matrix[i - 1][0] + 1;
+
+        for (int j = 1; j <= n; ++j) {
+            matrix[i][j] = min(
+                                    matrix[i - 1][  j  ] + 1,
+                                min(
+                                    matrix[  i  ][j - 1] + 1,
+                                    matrix[i - 1][j - 1] + \
+                                        costOfReplacement(file1[i - 1], file2[j - 1])
+                                )
+            );
+        }
+    }
+
+
+    return matrix[m][n];
 }
+
 
 
 #endif
