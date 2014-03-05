@@ -39,10 +39,10 @@ bool isDirectory(string path)
 
 string joinPaths(string path, string postfix)
 {
-    if (path.at(-1) == fileSeparator)
+    if (path[path.size() - 1] == fileSeparator)
         path.erase(path.end() - 1);
 
-    if (postfix.at(0) == fileSeparator)
+    if (postfix[0] == fileSeparator)
         postfix.erase(postfix.begin());
 
     return path + fileSeparator + postfix;
