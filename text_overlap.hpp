@@ -17,6 +17,8 @@ using std::ifstream;
 using std::vector;
 using std::string;
 using std::max;
+using std::cerr;
+using std::endl;
 
 
 
@@ -38,7 +40,7 @@ int textOverlap(string filename1, string filename2)
         }
 
         while (getline(file2, line)) {
-            if (line != "") {
+            if (COMPARE_EMPTY_LINES || line != "") {
                 fileStrings2.push_back(line);
             }
         }
@@ -53,9 +55,7 @@ int textOverlap(string filename1, string filename2)
         return diffInPercents;
     }
     else {
-
-        // TODO: throw exception
-        std::cout << "Cannot open " << filename1 << " or " << filename2 << std::endl;
+        cerr << "Can't open " << filename1 << " or " << filename2 << endl;
 
         return 0;
     }
