@@ -10,6 +10,8 @@
 
 #include "levenshtein_distance.hpp"
 
+#include "config.h"
+
 
 using std::ifstream;
 using std::vector;
@@ -30,11 +32,15 @@ int textOverlap(string filename1, string filename2)
         string line;
 
         while (getline(file1, line)) {
-            fileStrings1.push_back(line);
+            if (COMPARE_EMPTY_LINES || line != "") {
+                fileStrings1.push_back(line);
+            }
         }
 
         while (getline(file2, line)) {
-            fileStrings2.push_back(line);
+            if (line != "") {
+                fileStrings2.push_back(line);
+            }
         }
 
         int k = fileStrings1.size();
