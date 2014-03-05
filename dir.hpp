@@ -5,32 +5,31 @@
 
 #include <sys/stat.h>
 #include <cstdlib>
+#include <vector>
 #include <string>
+#include <iostream>
 
 
-#if __posix__ || __linux__
+using std::string;
+using std::vector;
+using std::cerr;
+using std::endl;
+
+
+#ifdef __unix__
 #include <dirent.h>
-#elif _WIN32
-#include "vendor/dirent.h"
-#else
-#error "Sosi, not supported"
-#endif
-
-
-// TODO: to separate file
-// TODO: __unix__
-
-#if __posix__ || __linux__
 const char fileSeparator = '/';
 #elif _WIN32
+#include "vendor/dirent.h"
 const char fileSeparator = '\\';
 #else
-#error "Sosi, not supported"
+#error This OS is not supported
 #endif
 
 
 
-bool isDirectory(string path) {
+bool isDirectory(string path)
+{
     struct stat buf;
     stat(path.c_str(), &buf);
     return S_ISDIR(buf.st_mode);
@@ -40,13 +39,11 @@ bool isDirectory(string path) {
 
 string joinPaths(string path, string postfix)
 {
-    char pathEnd = path[path.size() - 1];
-    if (pathEnd == fileSeparator)
-        path.erase(path.size() - 1, 1);
+    if (path.at(-1) == fileSeparator)
+        path.erase(path.end() - 1);
 
-    char postfixBegin = postfix[postfix.size() - 1];
-    if (postfixBegin == fileSeparator)
-        postfix.erase(0, 1);
+    if (postfix.at(0) == fileSeparator)
+        postfix.erase(postfix.begin());
 
     return path + fileSeparator + postfix;
 }
@@ -70,13 +67,11 @@ void readDirectory(vector<string> &listOfFiles, string path)
             closedir(directory);
         }
         else {
-            // TODO: Throw exception
-            std::cout << "Cant open " << path << std::endl;
+            cerr << "Can't open " << path << endl;
         }
     }
     else {
         listOfFiles.push_back(path);
-        // std::cout << "Compare with " << path << " " << isDirectory(path) << std::endl;
     }
 }
 

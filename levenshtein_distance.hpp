@@ -21,9 +21,11 @@ inline int costOfReplacement(string first, string second)
 
 
 
-int levenshtein_distance(vector<string> &file1, vector<string> &file2, int m, int n)
+int levenshteinDistance(vector<string> &file1, vector<string> &file2)
 {
-    // TODO: m and n is lengths, can be calculated here. Remove.
+    const int m = file1.size();
+    const int n = file2.size();
+
 
     int matrix[m + 1][n + 1];
 

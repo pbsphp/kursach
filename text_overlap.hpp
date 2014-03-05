@@ -5,6 +5,8 @@
 
 #include <fstream>
 #include <vector>
+#include <string>
+#include <algorithm>
 
 #include "levenshtein_distance.hpp"
 
@@ -16,7 +18,7 @@ using std::max;
 
 
 
-int text_overlap(string filename1, string filename2)
+int textOverlap(string filename1, string filename2)
 {
     ifstream file1(filename1.c_str());
     ifstream file2(filename2.c_str());
@@ -38,7 +40,7 @@ int text_overlap(string filename1, string filename2)
         int k = fileStrings1.size();
         int l = fileStrings2.size();
 
-        float difference = levenshtein_distance(fileStrings1, fileStrings2, k, l);
+        float difference = levenshteinDistance(fileStrings1, fileStrings2);
 
         int diffInPercents = (1 - difference / max(k, l)) * 100;
 

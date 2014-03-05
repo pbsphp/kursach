@@ -12,8 +12,6 @@ using namespace std;
 
 
 
-
-
 int main(int argc, char *argv[])
 {
     if (argc > 2) {
@@ -27,15 +25,15 @@ int main(int argc, char *argv[])
         }
 
         for (int i = 0; i < filenamesList.size(); ++i) {
-            int diff = text_overlap(fileForComparison, filenamesList[i]);
+            int diff = textOverlap(fileForComparison, filenamesList[i]);
             cout << "Compare with " << filenamesList[i] << " : " \
                 << diff << "%" << endl;
         }
 
     }
     else {
-        // TODO: Pretty error messsage and exit(1)
-        cout << "No files" << endl;
+        cerr << "No input files" << endl;
+        return 1;
     }
 
 
