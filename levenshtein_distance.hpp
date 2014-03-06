@@ -6,22 +6,86 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <cstring>
+
+
+#include "config.h"
 
 
 using std::string;
 using std::vector;
 using std::min;
+using std::max;
+
+
+
+void removeWhitespaces(string &str);
+
+int stringSimilarity(string first, string second);
+
+template <typename T>
+int levenshteinDistance(T &file1, T &file2);
+
+inline int costOfReplacement(string first, string second);
+
+inline int costOfReplacement(char first, char second);
+
+
+
+
+void removeWhitespaces(string &str)
+{
+    int c = 0;
+    while (isspace(str[c]))
+        ++c;
+
+    str.erase(0, c);
+}
+
+
+
+
+int stringSimilarity(string first, string second)
+{
+
+    removeWhitespaces(first);
+    removeWhitespaces(second);
+
+    float distance = levenshteinDistance(first, second);
+    int k = first.length();
+    int l = second.length();
+
+    int similarity = (1 - distance / max(k, l)) * 100;
+
+    return similarity;
+}
 
 
 
 inline int costOfReplacement(string first, string second)
+{
+    if (SIMILAR_STRINGS_EQUALITY && \
+        stringSimilarity(first, second) <= PERCENT_OF_SIMILARITY) {
+        return 1;
+    }
+    else if ((!SIMILAR_STRINGS_EQUALITY) && first != second) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+
+inline int costOfReplacement(char first, char second)
 {
     return (first != second) ? 1 : 0;
 }
 
 
 
-int levenshteinDistance(vector<string> &file1, vector<string> &file2)
+template <typename T>
+int levenshteinDistance(T &file1, T &file2)
 {
     const int m = file1.size();
     const int n = file2.size();

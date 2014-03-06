@@ -56,11 +56,5 @@ int main(int argc, char *argv[])
     }
 
 
-    // string s = "sooqa";
-    // string s2 = "\n{};";
-
-    // cout << isCodeString(s2) << endl;
-
-
     return 0;
 }
