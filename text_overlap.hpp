@@ -65,6 +65,21 @@ bool isCodeFile(string filename)
 
 
 
+bool isCodeString(string str)
+{
+    string ignoredSymbols = "{} \t\n\v\f\r()[];";
+
+    for (string::iterator it = str.begin(); it != str.end(); ++it) {
+        if (ignoredSymbols.find(*it) == string::npos) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+
 int textOverlap(string filename1, string filename2)
 {
     if (NOT_ONLY_C_AND_CPP_FILES || (isCodeFile(filename1) && isCodeFile(filename2))) {
@@ -78,13 +93,13 @@ int textOverlap(string filename1, string filename2)
             string line;
 
             while (getline(file1, line)) {
-                if (COMPARE_EMPTY_LINES || line != "") {
+                if ((!COMPARE_ONLY_CODE) || isCodeString(line)) {
                     fileStrings1.push_back(line);
                 }
             }
 
             while (getline(file2, line)) {
-                if (COMPARE_EMPTY_LINES || line != "") {
+                if ((!COMPARE_ONLY_CODE) || isCodeString(line)) {
                     fileStrings2.push_back(line);
                 }
             }
