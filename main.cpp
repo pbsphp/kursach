@@ -31,7 +31,18 @@ int main(int argc, char *argv[])
         for (int i = 0; i < filenamesList.size(); ++i) {
             Difference diff;
             diff.filename = filenamesList[i];
-            diff.levenshteinSimilarity = textOverlap(fileForComparison, filenamesList[i]);
+
+            try {
+                diff.levenshteinSimilarity = textOverlap(fileForComparison, filenamesList[i]);
+            }
+            catch (InputError &e) {
+                cerr << "Cannot read file, skipping" << endl;
+                break;
+            }
+            catch (NotCodeFileError &e) {
+                cerr << "Not c/cpp file, skipping" << endl;
+                break;
+            }
 
             results.push_back(diff);
         }

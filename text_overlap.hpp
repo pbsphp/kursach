@@ -3,6 +3,7 @@
 #define TEXT_OVERLAP_H
 
 
+#include <stdexcept>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -19,6 +20,22 @@ using std::string;
 using std::max;
 using std::cerr;
 using std::endl;
+
+
+
+class InputError : public std::runtime_error
+{
+public:
+    InputError() : std::runtime_error("InputError") {}
+};
+
+
+
+class NotCodeFileError : public std::runtime_error
+{
+public:
+    NotCodeFileError() : std::runtime_error("NotCodeFileError") {}
+};
 
 
 
@@ -82,14 +99,11 @@ int textOverlap(string filename1, string filename2)
             return diffInPercents;
         }
         else {
-            cerr << "Can't open " << filename1 << " or " << filename2 << endl;
-
-            return 0;
+            throw InputError();
         }
     }
     else {
-        cerr << "Not C/CPP file, skipping" << endl;
-        return 0;
+        throw NotCodeFileError();
     }
 }
 
