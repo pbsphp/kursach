@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
         vector<Difference> results;
 
-        for (int i = 0; i < filenamesList.size(); ++i) {
+        for (size_t i = 0; i < filenamesList.size(); ++i) {
             Difference diff;
             diff.filename = filenamesList[i];
 

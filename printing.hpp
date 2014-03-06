@@ -33,7 +33,7 @@ void printAsTable(vector<Difference> &diff)
 {
     sort(diff.begin(), diff.end(), compareDiffs);
 
-    for (int i = 0; i < diff.size(); ++i)
+    for (size_t i = 0; i < diff.size(); ++i)
     {
         cout << diff[i].filename << " : " << diff[i].levenshteinSimilarity << "%" << endl;
     }
