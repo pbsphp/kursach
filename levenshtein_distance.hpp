@@ -88,9 +88,10 @@ int levenshteinDistance(T &file1, T &file2)
     const int n = file2.size();
 
 
-    int matrix[m + 1][n + 1];
+    int **matrix = new int *[m + 1];
 
     for (int i = 0; i <= m; ++i) {
+        matrix[i] = new int [n + 1];
         for (int j = 0; j <= n; ++j) {
             matrix[i][j] = 0;
         }
@@ -118,7 +119,14 @@ int levenshteinDistance(T &file1, T &file2)
     }
 
 
-    return matrix[m][n];
+    int distance = matrix[m][n];
+    for (int i = 0; i <= m; ++i) {
+        delete[] matrix[i];
+    }
+    delete[] matrix;
+
+
+    return distance;
 }
 
 
