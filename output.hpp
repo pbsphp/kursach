@@ -1,6 +1,6 @@
 
-#ifndef PRINTING_H
-#define PRINTING_H
+#ifndef OUTPUT_H
+#define OUTPUT_H
 
 
 #include <iostream>
@@ -9,6 +9,7 @@
 
 using std::cout;
 using std::endl;
+using std::vector;
 
 
 

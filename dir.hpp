@@ -23,7 +23,7 @@ const char fileSeparator = '/';
 #include "vendor/dirent.h"
 const char fileSeparator = '\\';
 #else
-#error This OS is not supported
+#error "This OS is not supported"
 #endif
 
 

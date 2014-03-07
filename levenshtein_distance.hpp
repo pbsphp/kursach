@@ -32,7 +32,6 @@ inline int costOfReplacement(char first, char second);
 
 
 
-
 void removeWhitespaces(string &str)
 {
     int c = 0;
@@ -44,10 +43,8 @@ void removeWhitespaces(string &str)
 
 
 
-
 int stringSimilarity(string first, string second)
 {
-
     removeWhitespaces(first);
     removeWhitespaces(second);
 
@@ -55,9 +52,9 @@ int stringSimilarity(string first, string second)
     int k = first.length();
     int l = second.length();
 
-    int similarity = (1 - distance / max(k, l)) * 100;
+    int difference = (distance / max(k, l)) * 100;
 
-    return similarity;
+    return 100 - difference;
 }
 
 
@@ -116,14 +113,13 @@ int levenshteinDistance(T &file1, T &file2)
                                     matrix[i - 1][j - 1] + \
                                         costOfReplacement(file1[i - 1], file2[j - 1])
                                 )
-            );
+                            );
         }
     }
 
 
     return matrix[m][n];
 }
-
 
 
 #endif

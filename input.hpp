@@ -67,11 +67,9 @@ bool isCodeString(string str)
 {
     string ignoredSymbols = "{} \t\n\v\f\r()[];";
 
-    for (string::iterator it = str.begin(); it != str.end(); ++it) {
-        if (ignoredSymbols.find(*it) == string::npos) {
+    for (string::iterator it = str.begin(); it != str.end(); ++it)
+        if (ignoredSymbols.find(*it) == string::npos)
             return true;
-        }
-    }
 
     return false;
 }
@@ -100,7 +98,6 @@ void readFromFile(string filename, vector<string> &fileStrings)
         throw NotCodeFileError();
     }
 }
-
 
 
 #endif
