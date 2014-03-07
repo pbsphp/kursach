@@ -5,7 +5,9 @@
 
 #include "text_overlap.hpp"
 #include "dir.hpp"
-#include "printing.hpp"
+
+#include "input.hpp"
+#include "output.hpp"
 
 
 using namespace std;
