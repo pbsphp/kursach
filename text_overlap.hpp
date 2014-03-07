@@ -80,38 +80,33 @@ bool isCodeString(string str)
 
 
 
-int textOverlap(string filename1, string filename2)
+int textOverlap(vector<string> file1, vector<string> file2)
 {
-    if (NOT_ONLY_C_AND_CPP_FILES || (isCodeFile(filename1) && isCodeFile(filename2))) {
-        ifstream file1(filename1.c_str());
-        ifstream file2(filename2.c_str());
+    int k = file1.size();
+    int l = file2.size();
 
-        vector<string> fileStrings1;
-        vector<string> fileStrings2;
+    float difference = levenshteinDistance(file1, file2);
 
-        if (file1 && file2) {
+    int diffInPercents = (1 - difference / max(k, l)) * 100;
+
+    return diffInPercents;
+}
+
+
+
+void readFromFile(string filename, vector<string> &fileStrings)
+{
+    if (NOT_ONLY_C_AND_CPP_FILES || (isCodeFile(filename))) {
+        ifstream file(filename.c_str());
+
+        if (file) {
             string line;
 
-            while (getline(file1, line)) {
+            while (getline(file, line)) {
                 if ((!COMPARE_ONLY_CODE) || isCodeString(line)) {
-                    fileStrings1.push_back(line);
+                    fileStrings.push_back(line);
                 }
             }
-
-            while (getline(file2, line)) {
-                if ((!COMPARE_ONLY_CODE) || isCodeString(line)) {
-                    fileStrings2.push_back(line);
-                }
-            }
-
-            int k = fileStrings1.size();
-            int l = fileStrings2.size();
-
-            float difference = levenshteinDistance(fileStrings1, fileStrings2);
-
-            int diffInPercents = (1 - difference / max(k, l)) * 100;
-
-            return diffInPercents;
         }
         else {
             throw InputError();
@@ -121,6 +116,7 @@ int textOverlap(string filename1, string filename2)
         throw NotCodeFileError();
     }
 }
+
 
 
 #endif

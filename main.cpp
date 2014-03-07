@@ -15,9 +15,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     if (argc > 2) {
-
-        string fileForComparison = argv[1];
-
+        string fileForComparisonName = argv[1];
 
         vector<string> filenamesList;
 
@@ -26,27 +24,48 @@ int main(int argc, char *argv[])
         }
 
 
+        vector<string> fileForComparison;
+
+        try {
+            readFromFile(fileForComparisonName, fileForComparison);
+        }
+        catch (InputError &e) {
+            cerr << "Cannot read " << fileForComparisonName << endl;
+            return 1;
+        }
+        catch (NotCodeFileError &e) {
+            cerr << fileForComparisonName << " is not c/cpp file" << endl;
+            return 1;
+        }
+
+
         vector<Difference> results;
 
         for (size_t i = 0; i < filenamesList.size(); ++i) {
-            Difference diff;
-            diff.filename = filenamesList[i];
+
+            vector<string> exampleFile;
 
             try {
-                diff.levenshteinSimilarity = textOverlap(fileForComparison, filenamesList[i]);
+                readFromFile(filenamesList[i], exampleFile);
             }
             catch (InputError &e) {
-                cerr << "Cannot read file, skipping" << endl;
+                cerr << "Skipping " << filenamesList[i] << endl;
                 break;
             }
             catch (NotCodeFileError &e) {
-                cerr << "Not c/cpp file, skipping" << endl;
+                cerr << "Skipping " << filenamesList[i] << endl;
                 break;
             }
 
+
+            Difference diff;
+
+            diff.filename = filenamesList[i];
+            diff.levenshteinSimilarity = textOverlap(fileForComparison, exampleFile);
+            // diff.tabStyles = ...
+
             results.push_back(diff);
         }
-
 
         printAsTable(results);
     }
