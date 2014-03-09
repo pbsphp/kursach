@@ -4,3 +4,5 @@
 
 #define SIMILAR_STRINGS_EQUALITY true
 #define PERCENT_OF_SIMILARITY 90
+
+#define REMOVE_COMMENTS true

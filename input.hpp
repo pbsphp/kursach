@@ -10,6 +10,7 @@
 #include <algorithm>
 
 #include "config.h"
+#include "remove_comments.hpp"
 
 
 using std::ifstream;
@@ -84,7 +85,13 @@ void readFromFile(string filename, vector<string> &fileStrings)
         if (file) {
             string line;
 
+            bool isMultilineCommentBody = false;
+
             while (getline(file, line)) {
+                if (REMOVE_COMMENTS) {
+                    removeCommentsFrom(line, isMultilineCommentBody);
+                }
+
                 if ((!COMPARE_ONLY_CODE) || isCodeString(line)) {
                     fileStrings.push_back(line);
                 }
