@@ -21,14 +21,15 @@ using std::max;
 
 void removeWhitespaces(string &str);
 
-int stringSimilarity(string first, string second);
+int stringSimilarityPercent(string first, string second);
 
 template <typename T>
 int levenshteinDistance(T &file1, T &file2);
 
-inline int costOfReplacement(string first, string second);
+template <typename T>
+inline int costOfReplacement(T first, T second);
 
-inline int costOfReplacement(char first, char second);
+inline bool areSimilar(string first, string second);
 
 
 
@@ -43,7 +44,7 @@ void removeWhitespaces(string &str)
 
 
 
-int stringSimilarity(string first, string second)
+int stringSimilarityPercent(string first, string second)
 {
     removeWhitespaces(first);
     removeWhitespaces(second);
@@ -59,24 +60,31 @@ int stringSimilarity(string first, string second)
 
 
 
-inline int costOfReplacement(string first, string second)
+inline bool areSimilar(string first, string second)
 {
-    if (SIMILAR_STRINGS_EQUALITY && \
-        stringSimilarity(first, second) <= PERCENT_OF_SIMILARITY) {
-        return 1;
-    }
-    else if ((!SIMILAR_STRINGS_EQUALITY) && first != second) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
+    if (SIMILAR_STRINGS_EQUALITY)
+        return (stringSimilarityPercent(first, second) >= PERCENT_OF_SIMILARITY);
+    else
+        return (first == second);
 }
 
 
-inline int costOfReplacement(char first, char second)
+
+inline bool areSimilar(char first, char second)
 {
-    return (first != second) ? 1 : 0;
+    return (first == second);
+}
+
+
+
+template <typename T>
+inline int costOfReplacement(T first, T second)
+{
+    if (areSimilar(first, second))
+        return 0;
+    else {
+        return 1;
+    }
 }
 
 
@@ -107,14 +115,26 @@ int levenshteinDistance(T &file1, T &file2)
         matrix[i][0] = matrix[i - 1][0] + 1;
 
         for (int j = 1; j <= n; ++j) {
+            int cost = costOfReplacement(file1[i - 1], file2[j - 1]);
+
             matrix[i][j] = min(
                                     matrix[i - 1][  j  ] + 1,
                                 min(
                                     matrix[  i  ][j - 1] + 1,
-                                    matrix[i - 1][j - 1] + \
-                                        costOfReplacement(file1[i - 1], file2[j - 1])
+                                    matrix[i - 1][j - 1] + cost
                                 )
                             );
+
+
+            if (i > 1 && j > 1
+                && areSimilar(file1[i - 1], file2[j - 2])
+                && areSimilar(file1[i - 2], file2[j - 1])) {
+
+                matrix[i][j] = min(
+                    matrix[i][j],
+                    matrix[i - 2][j - 2] + cost
+                );
+            }
         }
     }
 
