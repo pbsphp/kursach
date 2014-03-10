@@ -16,10 +16,10 @@ using std::cerr;
 using std::endl;
 
 
-#ifdef __unix__
+#if defined(__unix__)
 #include <dirent.h>
 const char fileSeparator = '/';
-#elif _WIN32
+#elif defined(_WIN32)
 #include "vendor/dirent.h"
 const char fileSeparator = '\\';
 #else

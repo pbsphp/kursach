@@ -1,8 +1,7 @@
 
 #define COMPARE_ONLY_CODE true
-#define NOT_ONLY_C_AND_CPP_FILES true
+#define NOT_ONLY_C_AND_CPP_FILES false
+#define REMOVE_COMMENTS true
 
 #define SIMILAR_STRINGS_EQUALITY true
 #define PERCENT_OF_SIMILARITY 90
-
-#define REMOVE_COMMENTS true

@@ -43,17 +43,15 @@ bool hasEnding(string str, string ending)
     int k = str.length();
     int l = ending.length();
 
-    if (k >= l) {
+    if (k >= l)
         return (str.compare(k - l, l, ending) == 0);
-    }
-    else {
+    else
         return false;
-    }
 }
 
 
 
-bool isCodeFile(string filename)
+inline bool isCodeFile(string filename)
 {
     if (hasEnding(filename, ".cpp") || hasEnding(filename, ".c") || \
         hasEnding(filename, ".hpp") || hasEnding(filename, ".h"))

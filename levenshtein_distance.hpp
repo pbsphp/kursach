@@ -19,7 +19,7 @@ using std::max;
 
 
 
-void removeWhitespaces(string &str);
+void removeTabs(string &str);
 
 int stringSimilarityPercent(string first, string second);
 
@@ -31,9 +31,11 @@ inline int costOfReplacement(T first, T second);
 
 inline bool areSimilar(string first, string second);
 
+inline bool areSimilar(char first, char second);
 
 
-void removeWhitespaces(string &str)
+
+void removeTabs(string &str)
 {
     int c = 0;
     while (isspace(str[c]))
@@ -46,8 +48,8 @@ void removeWhitespaces(string &str)
 
 int stringSimilarityPercent(string first, string second)
 {
-    removeWhitespaces(first);
-    removeWhitespaces(second);
+    removeTabs(first);
+    removeTabs(second);
 
     float distance = levenshteinDistance(first, second);
     int k = first.length();
@@ -82,9 +84,8 @@ inline int costOfReplacement(T first, T second)
 {
     if (areSimilar(first, second))
         return 0;
-    else {
+    else
         return 1;
-    }
 }
 
 

@@ -1,6 +1,4 @@
 
-// TODO: Merge with levenshtein_distance.hpp
-
 #ifndef TEXT_OVERLAP_H
 #define TEXT_OVERLAP_H
 
@@ -18,7 +16,7 @@ using std::max;
 
 
 
-int textOverlap(vector<string> file1, vector<string> file2)
+int textOverlap(vector<string> &file1, vector<string> &file2)
 {
     int k = file1.size();
     int l = file2.size();
