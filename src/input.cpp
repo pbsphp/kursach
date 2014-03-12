@@ -8,16 +8,10 @@
 #include "config.h"
 #include "remove_comments.hpp"
 
-// TODO: Exceptions in separate file
-#include "input.hpp"
+#include "input_exceptions.hpp"
 
 
-using std::ifstream;
-using std::vector;
-using std::string;
-using std::max;
-using std::endl;
-
+using namespace std;
 
 
 bool hasEnding(string str, string ending)
