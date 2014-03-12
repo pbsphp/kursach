@@ -1,26 +1,11 @@
-
-#ifndef OUTPUT_H
-#define OUTPUT_H
-
-
 #include <iostream>
 #include <vector>
+#include <algorithm>
+
+#include "difference.h"
 
 
-using std::cout;
-using std::endl;
-using std::vector;
-
-
-
-struct Difference
-{
-    string filename;
-    int levenshteinSimilarity;
-    // TODO: compare variables, classes, etc
-    // TODO: compare coding styles
-};
-
+using namespace std;
 
 
 bool compareDiffs(Difference a, Difference b)
@@ -37,6 +22,3 @@ void printAsTable(vector<Difference> &diff)
     for (size_t i = 0; i < diff.size(); ++i)
         cout << diff[i].filename << " : " << diff[i].levenshteinSimilarity << "%" << endl;
 }
-
-
-#endif

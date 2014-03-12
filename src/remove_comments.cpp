@@ -1,15 +1,8 @@
-
-#ifndef REMOVE_COMMENTS_H
-#define REMOVE_COMMENTS_H
-
-
 #include <string>
 #include <algorithm>
 
 
-using std::string;
-using std::remove;
-
+using namespace std;
 
 
 void removeCommentsFrom(string &line, bool &isMultilineCommentBody)
@@ -42,9 +35,5 @@ void removeCommentsFrom(string &line, bool &isMultilineCommentBody)
         }
     }
 
-
     line.erase(remove(line.begin(), line.end(), M), line.end());
 }
-
-
-#endif

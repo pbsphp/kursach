@@ -1,8 +1,3 @@
-
-#ifndef TEXT_OVERLAP_H
-#define TEXT_OVERLAP_H
-
-
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -10,10 +5,7 @@
 #include "levenshtein_distance.hpp"
 
 
-using std::vector;
-using std::string;
-using std::max;
-
+using namespace std;
 
 
 int textOverlap(vector<string> &file1, vector<string> &file2)
@@ -27,6 +19,3 @@ int textOverlap(vector<string> &file1, vector<string> &file2)
 
     return diffInPercents;
 }
-
-
-#endif

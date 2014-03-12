@@ -12,10 +12,7 @@
 #include "config.h"
 
 
-using std::string;
-using std::vector;
-using std::min;
-using std::max;
+using namespace std;
 
 
 

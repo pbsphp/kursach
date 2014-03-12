@@ -1,40 +1,22 @@
-
-#ifndef INPUT_H
-#define INPUT_H
-
-
 #include <stdexcept>
 #include <fstream>
 #include <vector>
 #include <string>
 #include <algorithm>
 
+
 #include "config.h"
 #include "remove_comments.hpp"
+
+// TODO: Exceptions in separate file
+#include "input.hpp"
 
 
 using std::ifstream;
 using std::vector;
 using std::string;
 using std::max;
-using std::cerr;
 using std::endl;
-
-
-
-class InputError : public std::runtime_error
-{
-public:
-    InputError() : std::runtime_error("InputError") {}
-};
-
-
-
-class NotCodeFileError : public std::runtime_error
-{
-public:
-    NotCodeFileError() : std::runtime_error("NotCodeFileError") {}
-};
 
 
 
@@ -51,7 +33,7 @@ bool hasEnding(string str, string ending)
 
 
 
-inline bool isCodeFile(string filename)
+bool isCodeFile(string filename)
 {
     if (hasEnding(filename, ".cpp") || hasEnding(filename, ".c") || \
         hasEnding(filename, ".hpp") || hasEnding(filename, ".h"))
@@ -103,6 +85,3 @@ void readFromFile(string filename, vector<string> &fileStrings)
         throw NotCodeFileError();
     }
 }
-
-
-#endif

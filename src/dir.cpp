@@ -1,8 +1,3 @@
-
-#ifndef DIR_H
-#define DIR_H
-
-
 #include <sys/stat.h>
 #include <cstdlib>
 #include <vector>
@@ -10,20 +5,17 @@
 #include <iostream>
 
 
-using std::string;
-using std::vector;
-using std::cerr;
-using std::endl;
+using namespace std;
 
 
 #if defined(__unix__)
-#include <dirent.h>
-const char fileSeparator = '/';
+# include <dirent.h>
+# define FILE_SEPARATOR '/'
 #elif defined(_WIN32)
-#include "vendor/dirent.h"
-const char fileSeparator = '\\';
+# include "vendor/dirent.h"
+# define FILE_SEPARATOR '\\'
 #else
-#error "This OS is not supported"
+# error "This OS is not supported"
 #endif
 
 
@@ -39,13 +31,13 @@ bool isDirectory(string path)
 
 string joinPaths(string path, string postfix)
 {
-    if (path[path.size() - 1] == fileSeparator)
+    if (path[path.size() - 1] == FILE_SEPARATOR)
         path.erase(path.end() - 1);
 
-    if (postfix[0] == fileSeparator)
+    if (postfix[0] == FILE_SEPARATOR)
         postfix.erase(postfix.begin());
 
-    return path + fileSeparator + postfix;
+    return path + FILE_SEPARATOR + postfix;
 }
 
 
@@ -74,6 +66,3 @@ void readDirectory(vector<string> &listOfFiles, string path)
         listOfFiles.push_back(path);
     }
 }
-
-
-#endif
