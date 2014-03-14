@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <iostream>
 
 
 #include "config.h"
@@ -78,4 +79,12 @@ void readFromFile(string filename, vector<string> &fileStrings)
     else {
         throw NotCodeFileError();
     }
+}
+
+
+void pause()
+{
+    cout << "Press Enter to continue... " << flush;
+    cin.ignore(256,'\n');
+    cin.get();
 }

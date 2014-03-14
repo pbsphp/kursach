@@ -11,5 +11,7 @@
 
 void readFromFile(std::string filename, std::vector<std::string> &fileStrings);
 
+void pause();
+
 
 #endif

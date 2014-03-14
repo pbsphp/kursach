@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
         printAsTable(results);
 
         if (FRIENDLY_MODE)
-            cin.get();
+            pause();
     }
     else {
         if (VERBOSE_MODE)
