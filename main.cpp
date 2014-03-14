@@ -52,11 +52,11 @@ int main(int argc, char *argv[])
             }
             catch (InputError &e) {
                 cerr << "Skipping " << filenamesList[i] << endl;
-                break;
+                continue;
             }
             catch (NotCodeFileError &e) {
                 cerr << "Skipping " << filenamesList[i] << endl;
-                break;
+                continue;
             }
 
 
