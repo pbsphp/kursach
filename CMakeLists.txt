@@ -6,7 +6,7 @@ set(SOURCE main.cpp)
 
 file(GLOB_RECURSE SRC_FILES src/*)
 
-include_directories(include)
+include_directories(./include .)
 
 
 if(CMAKE_COMPILER_IS_GNUCXX)
