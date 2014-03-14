@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 
+#include "config.h"
+
 
 using namespace std;
 
@@ -59,7 +61,8 @@ void readDirectory(vector<string> &listOfFiles, string path)
             closedir(directory);
         }
         else {
-            cerr << "Can't open " << path << endl;
+            if (VERBOSE_MODE)
+                cerr << "Can't open " << path << endl;
         }
     }
     else {

@@ -11,3 +11,10 @@
 // Assume similar strings as equals (TODO: fix my fucking English)
 #define SIMILAR_STRINGS_EQUALITY true
 #define PERCENT_OF_SIMILARITY 90
+
+// Enable error messages
+#define VERBOSE_MODE true
+
+// Asks for filenames if argv is empty
+// Also, waits for press Enter after finish
+#define FRIENDLY_MODE true

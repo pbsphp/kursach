@@ -9,6 +9,8 @@
 #include "input.hpp"
 #include "output.hpp"
 
+#include "config.h"
+
 
 using namespace std;
 
@@ -16,13 +18,28 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    if (argc > 2) {
-        string fileForComparisonName = argv[1];
+    if (argc > 2 || FRIENDLY_MODE) {
 
+        string fileForComparisonName;
         vector<string> filenamesList;
 
-        for (int i = 2; i < argc; ++i) {
-            readDirectory(filenamesList, argv[i]);
+        if (argc > 2) {
+            fileForComparisonName = argv[1];
+
+            for (int i = 2; i < argc; ++i) {
+                readDirectory(filenamesList, argv[i]);
+            }
+        }
+        else {
+            if (VERBOSE_MODE)
+                cout << "Filename (full path): ";
+            cin >> fileForComparisonName;
+
+            if (VERBOSE_MODE)
+                cout << "Compare with (file or directory): ";
+            string compareWith;
+            cin >> compareWith;
+            readDirectory(filenamesList, compareWith);
         }
 
 
@@ -32,11 +49,13 @@ int main(int argc, char *argv[])
             readFromFile(fileForComparisonName, fileForComparison);
         }
         catch (InputError &e) {
-            cerr << "Cannot read " << fileForComparisonName << endl;
+            if (VERBOSE_MODE)
+                cerr << "Cannot read " << fileForComparisonName << endl;
             return 1;
         }
         catch (NotCodeFileError &e) {
-            cerr << fileForComparisonName << " is not c/cpp file" << endl;
+            if (VERBOSE_MODE)
+                cerr << fileForComparisonName << " is not c/cpp file" << endl;
             return 1;
         }
 
@@ -51,11 +70,13 @@ int main(int argc, char *argv[])
                 readFromFile(filenamesList[i], exampleFile);
             }
             catch (InputError &e) {
-                cerr << "Skipping " << filenamesList[i] << endl;
+                if (VERBOSE_MODE)
+                    cerr << "Skipping " << filenamesList[i] << endl;
                 continue;
             }
             catch (NotCodeFileError &e) {
-                cerr << "Skipping " << filenamesList[i] << endl;
+                if (VERBOSE_MODE)
+                    cerr << "Skipping " << filenamesList[i] << endl;
                 continue;
             }
 
@@ -70,9 +91,13 @@ int main(int argc, char *argv[])
         }
 
         printAsTable(results);
+
+        if (FRIENDLY_MODE)
+            cin.get();
     }
     else {
-        cerr << "No input files" << endl;
+        if (VERBOSE_MODE)
+            cerr << "No input files" << endl;
         return 1;
     }
 

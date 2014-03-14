@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "difference.h"
+#include "config.h"
 
 
 using namespace std;
