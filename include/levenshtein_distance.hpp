@@ -48,13 +48,16 @@ int stringSimilarityPercent(string first, string second)
     removeTabs(first);
     removeTabs(second);
 
-    float distance = levenshteinDistance(first, second);
-    int k = first.length();
-    int l = second.length();
+    int distance = levenshteinDistance(first, second);
 
-    int difference = (distance / max(k, l)) * 100;
+    int m = max(first.length(), second.length());
 
-    return 100 - difference;
+    float difference = (m != 0) ? float(distance) / m
+                                : 1;
+
+    int differencePercent = difference * 100;
+
+    return 100 - differencePercent;
 }
 
 

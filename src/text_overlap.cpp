@@ -10,12 +10,14 @@ using namespace std;
 
 int textOverlap(vector<string> &file1, vector<string> &file2)
 {
-    int k = file1.size();
-    int l = file2.size();
+    int distance = levenshteinDistance(file1, file2);
 
-    float difference = levenshteinDistance(file1, file2);
+    int m = max(file1.size(), file2.size());
 
-    int diffInPercents = (1 - difference / max(k, l)) * 100;
+    float difference = (m != 0) ? float(distance) / m
+                                : 1;
 
-    return diffInPercents;
+    int differencePercent = difference * 100;
+
+    return 100 - differencePercent;
 }
