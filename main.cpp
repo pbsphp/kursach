@@ -62,28 +62,29 @@ int main(int argc, char *argv[])
 
         vector<Difference> results;
 
-        for (size_t i = 0; i < filenamesList.size(); ++i) {
+        for (vector<string>::iterator filenameIt = filenamesList.begin(),
+            e = filenamesList.end(); filenameIt != e; ++filenameIt) {
 
             vector<string> exampleFile;
 
             try {
-                readFromFile(filenamesList[i], exampleFile);
+                readFromFile(*filenameIt, exampleFile);
             }
             catch (InputError &e) {
                 if (VERBOSE_MODE)
-                    cerr << "Skipping " << filenamesList[i] << endl;
+                    cerr << "Skipping " << *filenameIt << endl;
                 continue;
             }
             catch (NotCodeFileError &e) {
                 if (VERBOSE_MODE)
-                    cerr << "Skipping " << filenamesList[i] << endl;
+                    cerr << "Skipping " << *filenameIt << endl;
                 continue;
             }
 
 
             Difference diff;
 
-            diff.filename = filenamesList[i];
+            diff.filename = *filenameIt;
             diff.levenshteinSimilarity = textOverlap(fileForComparison, exampleFile);
             // diff.tabStyles = ...
 

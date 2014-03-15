@@ -22,19 +22,19 @@ bool hasEnding(string str, string ending)
 
     if (k >= l)
         return (str.compare(k - l, l, ending) == 0);
-    else
-        return false;
+
+    return false;
 }
 
 
 
-bool isCodeFile(string filename)
+inline bool isCodeFile(string filename)
 {
     if (hasEnding(filename, ".cpp") || hasEnding(filename, ".c") || \
         hasEnding(filename, ".hpp") || hasEnding(filename, ".h"))
         return true;
-    else
-        return false;
+
+    return false;
 }
 
 
@@ -43,7 +43,7 @@ bool isCodeString(string str)
 {
     string ignoredSymbols = "{} \t\n\v\f\r()[];";
 
-    for (string::iterator it = str.begin(); it != str.end(); ++it)
+    for (string::iterator it = str.begin(), e = str.end(); it != e; ++it)
         if (ignoredSymbols.find(*it) == string::npos)
             return true;
 

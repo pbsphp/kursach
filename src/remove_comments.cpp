@@ -7,6 +7,7 @@ using namespace std;
 
 void removeCommentsFrom(string &line, bool &isMultilineCommentBody)
 {
+    // TODO: Rewrite
     const char M = '\0';
 
     bool isInlineCommentBody = false;
