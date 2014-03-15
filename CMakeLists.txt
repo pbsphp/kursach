@@ -9,7 +9,10 @@ file(GLOB_RECURSE SRC_FILES src/*)
 include_directories(./include .)
 
 
-if(CMAKE_COMPILER_IS_GNUCXX)
+
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS "-O2 -pedantic -Wall")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "-O2 -pedantic -Wall")
 endif()
 
