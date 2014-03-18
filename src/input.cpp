@@ -30,11 +30,8 @@ bool hasEnding(string str, string ending)
 
 inline bool isCodeFile(string filename)
 {
-    if (hasEnding(filename, ".cpp") || hasEnding(filename, ".c") || \
-        hasEnding(filename, ".hpp") || hasEnding(filename, ".h"))
-        return true;
-
-    return false;
+    return (hasEnding(filename, ".cpp") || hasEnding(filename, ".c") ||
+            hasEnding(filename, ".hpp") || hasEnding(filename, ".h"));
 }
 
 
@@ -58,10 +55,9 @@ void readFromFile(string filename, vector<string> &fileStrings)
         ifstream file(filename.c_str());
 
         if (file) {
-            string line;
-
             bool isMultilineCommentBody = false;
 
+            string line;
             while (getline(file, line)) {
                 if (REMOVE_COMMENTS) {
                     removeCommentsFrom(line, isMultilineCommentBody);
