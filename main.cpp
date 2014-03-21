@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 
         vector<Difference> results;
 
-        for (vector<string>::iterator filenameIt = filenamesList.begin(),
+        for (auto filenameIt = filenamesList.begin(),
             e = filenamesList.end(); filenameIt != e; ++filenameIt) {
 
             vector<string> exampleFile;

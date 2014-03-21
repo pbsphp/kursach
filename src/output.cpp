@@ -9,18 +9,12 @@
 using namespace std;
 
 
-inline bool compareDiffs(Difference a, Difference b)
-{
-    return (a.levenshteinSimilarity < b.levenshteinSimilarity);
-}
-
-
-
 void printAsTable(vector<Difference> &diff)
 {
-    sort(diff.begin(), diff.end(), compareDiffs);
+    sort(diff.begin(), diff.end(), [](Difference a, Difference b) {
+        return (a.levenshteinSimilarity < b.levenshteinSimilarity);
+    });
 
-    for (vector<Difference>::iterator it = diff.begin(),
-        e = diff.end(); it != e; ++it)
+    for (auto it = diff.begin(), e = diff.end(); it != e; ++it)
         cout << it->filename << " : " << it->levenshteinSimilarity << "%\n";
 }

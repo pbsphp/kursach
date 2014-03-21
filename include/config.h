@@ -17,4 +17,4 @@
 
 // Asks for filenames if argv is empty
 // Also, waits for press Enter after finish
-#define FRIENDLY_MODE true
+#define FRIENDLY_MODE false

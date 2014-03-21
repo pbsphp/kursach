@@ -4,6 +4,7 @@
 #include <string>
 #include <algorithm>
 #include <iostream>
+#include <array>
 
 
 #include "config.h"
@@ -30,17 +31,29 @@ bool hasEnding(string str, string ending)
 
 inline bool isCodeFile(string filename)
 {
-    return (hasEnding(filename, ".cpp") || hasEnding(filename, ".c") ||
-            hasEnding(filename, ".hpp") || hasEnding(filename, ".h"));
+    std::array<string, 6> acceptedExtensions = {
+        ".cpp",
+        ".hpp",
+        ".c",
+        ".h",
+        ".cxx",
+        ".cc"
+    };
+
+    for (size_t i = 0; i < acceptedExtensions.size(); ++i)
+        if (hasEnding(filename, acceptedExtensions[i]))
+            return true;
+
+    return false;
 }
 
 
 
 bool isCodeString(string str)
 {
-    string ignoredSymbols = "{} \t\n\v\f\r()[];";
+    string ignoredSymbols = "\t\n\v\f\r ()[]{};,\\";
 
-    for (string::iterator it = str.begin(), e = str.end(); it != e; ++it)
+    for (auto it = str.begin(), e = str.end(); it != e; ++it)
         if (ignoredSymbols.find(*it) == string::npos)
             return true;
 
